@@ -1,0 +1,108 @@
+Program:
+    'diagram begin'
+        elements+=Element
+    'diagram end'
+;
+
+Element:
+    Enum | Class | Interface
+;
+
+Enum:
+    'Enum' name=ID ':' '('
+    'has' 'values' ':' values+=EnumValue[',']
+    ')'
+;
+
+EnumValue:
+    /[A-Z]+(?:_[A-Z]+)*/
+;
+
+Class:
+    abstract ?= 'Abstract' 'Class'
+    name=ID ':' '('
+    'has' 'attributes' ':' attributes*=Attribute[',']
+    'has' 'functions' ':' functions*=Function[',']
+    'has' 'relations' ':' relations*=Relation[',']
+      ')'
+;
+
+Attribute:
+    name=ID 'type' 'of' type=Type 'and' 'scope' 'is' scope=Scope
+;
+
+
+Scope:
+    'private' | 'protected' | 'public' | 'package'
+;
+
+Type:
+     List | Dictionary | BasicType
+;
+
+BasicType:
+    'int' | 'float' | 'string' | 'bool' | ID | 'Date'
+;
+
+List:
+    'list' 'of' object_type=BasicType 'objects'
+;
+
+Dictionary:
+    'dictionary' 'of' key_type=Type '-' value_type=Type 'pairs'
+;
+
+Function:
+    name=ID 'with' no_params ?= 'no' 'parameters' params*=Param[',']
+    'function' 'scope' 'is' scope=Scope
+    'and' 'return' 'type' 'is' return_type=FunctionReturnType
+
+;
+
+FunctionReturnType:
+     'void' | Type
+;
+
+Param:
+    name=ID 'type' 'of' type=Type
+;
+
+Relation:
+    RelationWithCardinality | RelationWithoutCardinality
+;
+
+RelationWithoutCardinality:
+    type=RelationTypeWithoutCardinality 'to' to=ID
+;
+
+RelationWithCardinality:
+    type=RelationTypeWithCardinality 'to' to=ID  cardinality=Cardinality
+;
+
+RelationTypeWithCardinality:
+    'DIRECTED ASSOCIATION' | 'REFLEXIVE ASSOCIATION' |
+    'ASSOCIATION' |'AGGREGATION' | 'COMPOSITION'
+;
+
+RelationTypeWithoutCardinality:
+     'INHERITANCE' | 'REALIZATION'
+;
+
+Cardinality:
+     'with' 'cardinality' from_side_cardinality=CardinalityValue 'on' '"from"' 'side'
+    'and' to_side_cardinality=CardinalityValue 'on' '"to"' 'side'
+;
+
+CardinalityValue:
+    'one or more' | 'zero or more' | 'zero or one' | 'one to one'
+;
+
+Interface:
+    'Interface' name=ID ':' '('
+    'has' 'attributes' ':' attributes*=Attribute[',']
+    'has methods' ':' methods*=Function [',']
+    'has relations' ':' relations*=Relation [',']
+    ')'
+;
+
+
