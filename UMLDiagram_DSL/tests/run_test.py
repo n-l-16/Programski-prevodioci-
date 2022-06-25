@@ -82,7 +82,7 @@ class Tests(unittest.TestCase):
 
     def test1(self):
         try:
-            self.assertRaises(ParamAlreadyDeclared, run_test, testing_files[10], self.my_metamodel)
+            self.assertRaises(ParamAlreadyDeclared, run_test, testing_files[11], self.my_metamodel)
             clear_collections()
             print(color.GREEN + "Semantic check: ParamAlreadyDeclared TEST PASSED" + color.END_GREEN)
         except Exception as e:
