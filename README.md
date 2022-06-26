@@ -7,5 +7,5 @@
 
 ## Način pokretanja
 * potrebno je pokrenuti main.py fajl <br />
-* može se pokretati iz PzCharm-a ili iz komande linije, ali ako se pokreće iz komandne linije, neće se vidi boje koje su dodate u ispisu u konzoli
+* može se pokretati iz PyCharm-a ili iz komande linije, ali ako se pokreće iz komandne linije, neće se vidi boje koje su dodate u ispisu u konzoli
 
